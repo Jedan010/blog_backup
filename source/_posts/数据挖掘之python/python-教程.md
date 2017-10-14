@@ -1,5 +1,6 @@
 ---
-title: python教程
+title: python 教程
+date: 2017-10-14 16:14:46
 tags:
 	- python
 	- numpy
@@ -13,6 +14,9 @@ categories:
 - **Python**
 - **Numpy**
 - **Matplotlib**
+
+
+更好的阅读体验请前往：https://nbviewer.jupyter.org/github/Jedan010/data-mining-in-python/blob/master/0.2.python%20turorial.ipynb
 
 ## Python
 Python是一种高级的，动态类型的多范型编程语言。很多时候，大家会说Python看起来简直和伪代码一样，这是因为你能够通过很少行数的代码表达出很有力的思想。
@@ -555,11 +559,6 @@ len(set([100,100,100,90,90,90]))
 ```
 
     4
-
-
-
-
-
     2
 
 
@@ -1305,7 +1304,7 @@ plt.show() ##图像展示
 ```
 
 
-![png](./fig/output_144_0.png)
+![png](./python-教程/output_144_0.png)
 
 
 #### 图像的一些基本操作
@@ -1340,7 +1339,7 @@ plt.show()
 ```
 
 
-![png](./fig/output_146_0.png)
+![png](./python-教程/output_146_0.png)
 
 
 可以在文档中阅读更多关于[plot](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot)的内容。
@@ -1370,7 +1369,7 @@ plt.title('con(x)')
 
 
 
-![png](./fig/output_149_1.png)
+![png](./python-教程/output_149_1.png)
 
 
 ### 其他类型的图像
@@ -1390,7 +1389,7 @@ plt.scatter(np.random.rand(100), np.random.rand(100))
 
 
 
-![png](./fig/output_152_1.png)
+![png](./python-教程/output_152_1.png)
 
 
 #### hist图
@@ -1412,7 +1411,7 @@ plt.hist(np.random.randn(1000))
 
 
 
-![png](./fig/output_154_1.png)
+![png](./python-教程/output_154_1.png)
 
 
 更多内容，可以阅读[文档](https://matplotlib.org/tutorials/index.html)

@@ -1,5 +1,6 @@
 ---
 title: python 环境搭建
+date: 2017-10-14 16:14:18
 tags:
 	- anaconda
 	- python环境
@@ -8,7 +9,7 @@ categories:
 	- 数据挖掘之python
 
 ---
-# python 环境搭建
+更好的阅读体验请前往：https://nbviewer.jupyter.org/github/Jedan010/data-mining-in-python/blob/master/0.1.python_env.ipynb
 
 
 ## 安装
@@ -20,12 +21,13 @@ categories:
 - 清华大学镜像下载：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ (推荐）
 
 推荐使用清华大学镜像下载，选择对应的版本，如："Anaconda3-5.0.0-Windows-x86_64.exe".
-![下载](./fig/1.png)
+![下载](./python-环境搭建/1.png)
+
 下载好之后默认安装就好，最后会询问是否加入到系统变量，选择加入。
 
 ### python版本问题
 
-Python有两个支持的版本，分别是2.7和3.5+。3.0以上的版本与2.7版本有了不少的改动，所以在3.0+的版本中2.7的语句有些是编译不成功的。本教程使用的版本是3.5+版本。要想查看python的版本，可以在cmd命令行中输入 `python --version` 来查看 ![python version](./fig/10.png)
+Python有两个支持的版本，分别是2.7和3.5+。3.0以上的版本与2.7版本有了不少的改动，所以在3.0+的版本中2.7的语句有些是编译不成功的。本教程使用的版本是3.5+版本。要想查看python的版本，可以在cmd命令行中输入 `python --version` 来查看 ![python version](./python-环境搭建/10.png)
 
 
 ## jupyter
@@ -34,25 +36,25 @@ Python有两个支持的版本，分别是2.7和3.5+。3.0以上的版本与2.7�
 
 - 下载好了之后,按 `win(开始键)`+`R` 然后输入`cmd`后点确定，会弹出一个界面。
 - 在弹出的界面里面输入`jupytre notebook`,会弹出一个网页.
-- 点击右上角的 `new` 选择 `python3` 即可创建并打开一个新的可运行 python`的笔记本jupyter。
+- 点击右上角的 `new` 选择 `python3` 即可创建并打开一个新的可运行 python`的笔记本jupyter`。
 
-![打开cmd](./fig/2.png) ![cmd](./fig/3.png) ![jupyter](./fig/4.png)
+![打开cmd](./python-环境搭建/2.png) ![cmd](./python-环境搭建/3.png) ![jupyter](./python-环境搭建/4.png)
 
 ### jupyter操作
 
 主要：代码运行、保存、文件重命名、文件上传
 
 在单元框里面写入代码后，按`Shift`+`Enter`键即可运行代码，显示结果。也可以选择导航栏中的按钮运行代码。
-![jupyter run](./fig/5.png)
+![jupyter run](./python-环境搭建/5.png)
 按左上角的保存键即可保存文件,或者按file下的save and checkpoint。
-![save and rename](./fig/6.png)
+![save and rename](./python-环境搭建/6.png)
 
 文件上传在jupyter主界面点右上角的upload后选择要上传的文件，再点一次upload即可上传文件。
-![upload_1](./fig/7.png) ![upload_2](./fig/8.png)
+![upload_1](./python-环境搭建/7.png) ![upload_2](./python-环境搭建/8.png)
 
 ### 选择在不同的工作目录下运行jupyter
 打开你要运行的工作目录，也就是打开你要存放代码的文件夹，然后按住Shift和右键,点击在此处打开powershell，然后和之前的一样，输入jupyter notebook即可在这个文件夹下打开jupyter，而且文件也保存在这个文件夹下，可以方便读取和存储数据在这个文件夹下。
-![powershell](./fig/9.png)
+![powershell](./python-环境搭建/9.png)
 
 ## 包管理
 
@@ -65,7 +67,7 @@ python本身的非常小，编写简单，容易上手。又由于python有各�
  - sklearn
 
 
- 其中[`numpy`](http://www.numpy.org/)是科学运算的基础，可以很方便的对数据进行多个维度操作。 [`Scipy`](https://www.scipy.org/)是一个基于python的数据科学运算体系，包括优化(scipy.optimize), 线性代数(scipy.optimize), 统计分析(scipy.optimize)等强大的算法。[`matplotlib`](https://matplotlib.org/)是类似于Matlab画图风格的强大2d画图工具。[`sklearn`](http://scikit-learn.org/)是一个基于python的机器学习库，里面包含各种机器学习算法。
+ 其中[`numpy`](http://www.numpy.org/)是科学运算的基础，可以很方便的对数据进行多个维度操作。 [`Scipy`](https://www.scipy.org/)是一个基于python的数据科学运算体系，包括优化(scipy.optimize), 线性代数(scipy.optimize), 统计分析(scipy.optimize)等强大的算法。[`matplotlib`](https://matplotlib.org/)是类似于Matlab画图风格的强大2d画图工具。[`sklearn`](/http://scikit-learn.org/)是一个基于python的机器学习库，里面包含各种机器学习算法。
 
 
 - python的官方教程: https://docs.scipy.org/doc/numpy-dev/user/quickstart.html
@@ -116,4 +118,4 @@ plt.plot(np.random.randn(100))
 
 
 
-![png](./fig/output_17_1.png)
+![png](./python-环境搭建/output_17_1.png)
