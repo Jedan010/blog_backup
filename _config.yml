@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -95,3 +95,15 @@ archive_generator:
   per_page: 10
   yearly: true
   monthly: true
+  
+search:
+  path: search.xml
+  field: post
+  
+# hexo sitemap网站地图
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+  
+google_site_verification: 4gzyiI-W-0ojCHIYpnY_ivYyJ30h_JD4T78ikQ9L45E

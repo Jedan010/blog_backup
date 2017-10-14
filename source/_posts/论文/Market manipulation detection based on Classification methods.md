@@ -5,7 +5,7 @@ tags:
 	- Classification methods
 	- Anomaly detection
 categories:
-	- paper
+	- 论文
 ---
 
 **Abstract**

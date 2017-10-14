@@ -4,7 +4,7 @@ tags:
 	- git
 	- github
 categories:
-	- git
+	- 编程
 
 ---
 
