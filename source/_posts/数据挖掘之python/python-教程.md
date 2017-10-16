@@ -11,17 +11,20 @@ categories:
 ---
 # Python Tutorial
 
-- **Python**
-- **Numpy**
-- **Matplotlib**
-
-
 更好的阅读体验请前往：https://nbviewer.jupyter.org/github/Jedan010/data-mining-in-python/blob/master/0.2.python%20turorial.ipynb
+
+
+教程内容包括：
+
+- **Python**
+- **NumPy**
+- **Pandas**
+- **Matplotlib**
 
 ## Python
 Python是一种高级的，动态类型的多范型编程语言。很多时候，大家会说Python看起来简直和伪代码一样，这是因为你能够通过很少行数的代码表达出很有力的思想。
 
-教程内容包括：
+内容包括：
 - 基础数据类型
 - 复合数据类型
 - 控制语句
@@ -559,6 +562,11 @@ len(set([100,100,100,90,90,90]))
 ```
 
     4
+
+
+
+
+
     2
 
 
@@ -881,9 +889,9 @@ e
 
 
 
-    array([[ 0.83501996,  0.02049602, -0.65572486],
-           [ 0.4146055 ,  1.17995873,  0.30880011],
-           [ 0.03466711,  1.1188649 , -1.59032107]])
+    array([[  5.50864964e-01,   5.81821800e-01,   3.77462077e-01],
+           [ -1.99984540e+00,   1.93020102e-01,   5.13948103e-04],
+           [ -1.89707738e+00,   6.30736571e-01,  -8.42767663e-01]])
 
 
 
@@ -897,9 +905,9 @@ f
 
 
 
-    array([[ 0.33050181,  0.96588204,  0.67309195],
-           [ 0.53159039,  0.65490935,  0.53038985],
-           [ 0.2754414 ,  0.64880951,  0.16782205]])
+    array([[ 0.48710492,  0.76725375,  0.97087062],
+           [ 0.91897568,  0.0903537 ,  0.25937125],
+           [ 0.11031977,  0.58737946,  0.13152459]])
 
 
 
@@ -1266,6 +1274,1055 @@ x + y
 
 这篇教程涉及了你需要了解的numpy中的一些重要内容，但是numpy远不止如此。可以查阅[numpy](https://docs.scipy.org/doc/numpy/reference/)文档来了解更多。
 
+## Pandas
+
+pandas是建立在NumPy之上，一个提供快速，灵活和表达性数据结构的Python包，旨在使“关系”或“标记”数据变得简单直观。pandas的两个主要数据结构Series（一维）和DataFrame（二维）处理了金融，统计，社会中的绝大多数典型用例科学，以及许多工程领域。本文主要以DateFrame展示。
+
+内容包括：
+ - 创建DateFrame
+ - 浏览数据
+ - 筛选数据
+ - 读写数据
+
+参考：
+ - 10分钟学会pandas：http://python.usyiyi.cn/documents/Pandas_0j2/10min.html#stats
+
+### 创建DateFrame
+
+
+```python
+import pandas as pd
+```
+
+#### 通过传入NumPy数组创建
+
+
+```python
+data = np.random.randn(6,4)
+df = pd.DataFrame(data=data, columns=['A', 'B', 'C', 'D'], index=pd.date_range('20171001', periods=6))
+df
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 通过字典对应创建
+
+
+```python
+df2 = pd.DataFrame(data = { 'A' : 1.,
+                    'B' : pd.Timestamp('20130102'),
+                    'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+                    'D' : np.array([3] * 4,dtype='int32'),
+                    'E' : pd.Categorical(["test","train","test","train"]),
+                    'F' : 'foo' })
+df2
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>2013-01-02</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>test</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>2013-01-02</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>train</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>2013-01-02</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>test</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>2013-01-02</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>train</td>
+      <td>foo</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### 浏览数据
+
+#### 查看头部
+
+
+```python
+df.head()
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 查看尾部
+
+
+```python
+df.tail()
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 显示索引
+
+
+```python
+df.index
+```
+
+
+
+
+    DatetimeIndex(['2017-10-01', '2017-10-02', '2017-10-03', '2017-10-04',
+                   '2017-10-05', '2017-10-06'],
+                  dtype='datetime64[ns]', freq='D')
+
+
+
+#### 显示列标题
+
+
+```python
+df.columns
+```
+
+
+
+
+    Index(['A', 'B', 'C', 'D'], dtype='object')
+
+
+
+#### 显示值
+
+
+```python
+df.values
+```
+
+
+
+
+    array([[-1.57365333, -0.04017843,  0.0048873 , -0.26708406],
+           [ 0.85536723, -1.56638508, -1.05163725, -1.49090484],
+           [-0.36435297,  1.54007977,  3.29192749,  0.00856722],
+           [-2.74807557, -1.26419063, -0.84813327, -0.40649889],
+           [ 0.45219662, -2.25330624, -0.19112681,  1.45967166],
+           [-0.12893988,  0.8650045 , -0.39841404, -0.18535124]])
+
+
+
+#### 快速统计摘要
+
+
+```python
+df.describe()
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-0.584576</td>
+      <td>-0.453163</td>
+      <td>0.134584</td>
+      <td>-0.146933</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.346361</td>
+      <td>1.484499</td>
+      <td>1.596789</td>
+      <td>0.948146</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.748076</td>
+      <td>-2.253306</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-1.271328</td>
+      <td>-1.490836</td>
+      <td>-0.735703</td>
+      <td>-0.371645</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-0.246646</td>
+      <td>-0.652185</td>
+      <td>-0.294770</td>
+      <td>-0.226218</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.306912</td>
+      <td>0.638709</td>
+      <td>-0.044116</td>
+      <td>-0.039912</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.855367</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>1.459672</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 按轴排序
+
+
+```python
+df.sort_index(axis=1, ascending=False)
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D</th>
+      <th>C</th>
+      <th>B</th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-0.267084</td>
+      <td>0.004887</td>
+      <td>-0.040178</td>
+      <td>-1.573653</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>-1.490905</td>
+      <td>-1.051637</td>
+      <td>-1.566385</td>
+      <td>0.855367</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>0.008567</td>
+      <td>3.291927</td>
+      <td>1.540080</td>
+      <td>-0.364353</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-0.406499</td>
+      <td>-0.848133</td>
+      <td>-1.264191</td>
+      <td>-2.748076</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>1.459672</td>
+      <td>-0.191127</td>
+      <td>-2.253306</td>
+      <td>0.452197</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.185351</td>
+      <td>-0.398414</td>
+      <td>0.865005</td>
+      <td>-0.128940</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 按值排序
+
+
+```python
+df.sort_values(by='A', ascending=True)
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### 选择数据
+
+#### 通过位置选择
+
+
+```python
+df.iloc[0:3, 1:4]
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 通过标签选择
+
+
+```python
+## 使用标签获取横截面
+df.loc['2017-10-01']
+```
+
+
+
+
+    A   -1.573653
+    B   -0.040178
+    C    0.004887
+    D   -0.267084
+    Name: 2017-10-01 00:00:00, dtype: float64
+
+
+
+
+```python
+## 按标签选择多轴
+df.loc[:, ['A', 'C']]
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>0.004887</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.051637</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>3.291927</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-0.848133</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-0.191127</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>-0.398414</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+## 显示标签切片，两个端点都包含
+df.loc['2017-10-01':'2017-10-03', ['B', 'D']]
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-0.040178</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>-1.566385</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>1.540080</td>
+      <td>0.008567</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### 通过条件选择
+
+
+```python
+df[df.A > 0]
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+## 使用isin() 进行过滤
+df2 = df.copy()
+df2['E'] = ['one', 'one','two','three','four','three']
+df2
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+      <td>one</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+      <td>one</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+      <td>two</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+      <td>three</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+      <td>four</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+      <td>three</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+df2[df2['E'].isin(['two','four'])]
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+      <td>two</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+      <td>four</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### 读取和写入数据
+
+#### CSV
+
+
+```python
+## 写入数据
+df.to_csv(path_or_buf='./data/foo.csv')  ##存在data文件夹中，如果没有要先创建一个data文件夹
+```
+
+
+```python
+## 读入数据
+df3 = pd.read_csv('./data/foo.csv', index_col=0)
+df3
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Excel
+
+
+```python
+## 写入
+df.to_excel('./data/foo.xlsx', sheet_name='Sheet1')
+```
+
+
+```python
+## 读入
+df4 = pd.read_excel('./data/foo.xlsx', sheetname='Sheet1', index_col=0)
+df4
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-10-01</th>
+      <td>-1.573653</td>
+      <td>-0.040178</td>
+      <td>0.004887</td>
+      <td>-0.267084</td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>0.855367</td>
+      <td>-1.566385</td>
+      <td>-1.051637</td>
+      <td>-1.490905</td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>-0.364353</td>
+      <td>1.540080</td>
+      <td>3.291927</td>
+      <td>0.008567</td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>-2.748076</td>
+      <td>-1.264191</td>
+      <td>-0.848133</td>
+      <td>-0.406499</td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>0.452197</td>
+      <td>-2.253306</td>
+      <td>-0.191127</td>
+      <td>1.459672</td>
+    </tr>
+    <tr>
+      <th>2017-10-06</th>
+      <td>-0.128940</td>
+      <td>0.865005</td>
+      <td>-0.398414</td>
+      <td>-0.185351</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+更多Pandas内容请查阅[官方文档](https://pandas.pydata.org/pandas-docs/stable/index.html)
+
 ## Matplotlib
 
 Matplotlib是一个作图库。这里简要介绍matplotlib.pyplot模块，功能和MATLAB的作图功能类似。
@@ -1304,7 +2361,7 @@ plt.show() ##图像展示
 ```
 
 
-![png](./python-教程/output_144_0.png)
+![png](./python-教程/output_187_0.png)
 
 
 #### 图像的一些基本操作
@@ -1339,7 +2396,7 @@ plt.show()
 ```
 
 
-![png](./python-教程/output_146_0.png)
+![png](./python-教程/output_189_0.png)
 
 
 可以在文档中阅读更多关于[plot](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot)的内容。
@@ -1364,12 +2421,12 @@ plt.title('con(x)')
 
 
 
-    <matplotlib.text.Text at 0x21b8db6b128>
+    <matplotlib.text.Text at 0x1edb5161978>
 
 
 
 
-![png](./python-教程/output_149_1.png)
+![png](./python-教程/output_192_1.png)
 
 
 ### 其他类型的图像
@@ -1384,12 +2441,12 @@ plt.scatter(np.random.rand(100), np.random.rand(100))
 
 
 
-    <matplotlib.collections.PathCollection at 0x21b8ba00e80>
+    <matplotlib.collections.PathCollection at 0x1edb537add8>
 
 
 
 
-![png](./python-教程/output_152_1.png)
+![png](./python-教程/output_195_1.png)
 
 
 #### hist图
@@ -1402,16 +2459,53 @@ plt.hist(np.random.randn(1000))
 
 
 
-    (array([   1.,    3.,   24.,   92.,  198.,  286.,  240.,  112.,   38.,    6.]),
-     array([-4.03366139, -3.31693408, -2.60020677, -1.88347946, -1.16675215,
-            -0.45002484,  0.26670247,  0.98342978,  1.70015709,  2.4168844 ,
-             3.13361171]),
+    (array([   3.,   14.,   75.,  157.,  239.,  234.,  183.,   67.,   23.,    5.]),
+     array([-3.42952578, -2.75353143, -2.07753707, -1.40154271, -0.72554835,
+            -0.049554  ,  0.62644036,  1.30243472,  1.97842908,  2.65442343,
+             3.33041779]),
      <a list of 10 Patch objects>)
 
 
 
 
-![png](./python-教程/output_154_1.png)
+![png](./python-教程/output_197_1.png)
 
 
-更多内容，可以阅读[文档](https://matplotlib.org/tutorials/index.html)
+### pandas数据画图
+
+[官方文档](https://pandas.pydata.org/pandas-docs/stable/visualization.html)
+
+
+```python
+df = pd.DataFrame(np.random.randn(1000, 4), index=pd.date_range('1/1/2000', periods=1000), columns=list('ABCD'))
+df.cumsum().plot()
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1edb53b2f60>
+
+
+
+
+![png](./python-教程/output_199_1.png)
+
+
+
+```python
+df.loc[:,'A'].plot(kind='hist')
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1edb55dcf28>
+
+
+
+
+![png](./python-教程/output_200_1.png)
+
+
+更多Matplotlib内容，请查阅[官方文档](https://matplotlib.org/tutorials/index.html)
